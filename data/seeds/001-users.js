@@ -18,9 +18,9 @@ exports.seed = async function(knex) {
     {id: 2, name: 'User'}
   ]);
   await knex('Users').insert([
-    {id: 1, email: 'timur@pizza.com', password: '1234', name: 'Timur', surname: 'Egemen', role_id: 1},
-    {id: 2, email: 'emre@pizza.com', password: '1234', name: 'Emre', surname: 'Şahiner', role_id: 2},
-    {id: 3, email: 'erdem@pizza.com', password: '1234', name: 'Erdem', surname: 'Günay', role_id: 2},
+    {id: 1, email: 'timur@pizza.com', password: '$2a$08$gGB73G42u2d0lV2s162Npef0FPLAdYuCoHD9xAyK/clGrJYnsy.eu', name: 'Timur', surname: 'Egemen', role_id: 1},
+    {id: 2, email: 'emre@pizza.com', password: '$2a$08$.dB2xQcd7/UPRsXp/el.mefkXKGxr9V3s.Dx40GWWLXQsJtqnVmLW', name: 'Emre', surname: 'Şahiner', role_id: 2},
+    {id: 3, email: 'erdem@pizza.com', password: '$2a$08$gGB73G42u2d0lV2s162Npef0FPLAdYuCoHD9xAyK/clGrJYnsy.eu', name: 'Erdem', surname: 'Günay', role_id: 2},
   ]);
   await knex('Pizzas').insert([
     {id: 1, name: 'Position Absolute Acı Pizza', description: 'Frontent Dev olarak hala position:absolute kullanıyorsan bu çok acı pizza tam sana göre. Pizza, domates, peynir ve genellikle çeşitli diğer malzemelerle kaplanmış, daha sonra geleneksel olarak odun ateşinde bir fırında yüksek sıcaklıkta pişirilen, genellikle yuvarlak, düzleştirilmiş mayalı buğday bazlı hamurdan oluşan İtalyan kökenli lezzetli bir yemektir. Küçük bir pizzaya bazen pizzetta denir.', price: 85.50},
