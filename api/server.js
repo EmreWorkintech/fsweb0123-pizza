@@ -13,8 +13,8 @@ server.get('/', (req,res)=> {
 })
 
 server.use('/api/auth', authRouter);
-server.use('/api/users', authMd.protected, authMd.checkRole("Admin"), usersRouter);
-server.use('/api/orders', authMd.protected, ordersRouter);
+server.use('/api/users', authMd.restricted, authMd.checkRole("Admin"), usersRouter);
+server.use('/api/orders', authMd.restricted, ordersRouter);
 
 
 server.use((err,req,res,next)=> {

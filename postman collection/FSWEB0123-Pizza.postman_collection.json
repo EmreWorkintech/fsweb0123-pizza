@@ -1,0 +1,501 @@
+{
+	"info": {
+		"_postman_id": "3dd82d53-dae3-4e6e-acc2-bab836a1d241",
+		"name": "FSWEB0123-Pizza",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6424696",
+		"_collection_link": "https://galactic-shadow-727198.postman.co/workspace/Workintech~03afa4ea-181f-4b05-81c3-74a3c2b63303/collection/6424696-3dd82d53-dae3-4e6e-acc2-bab836a1d241?action=share&creator=6424696&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Erkan\",\n    \"surname\": \"Yolaç\",\n    \"email\":    \"erkan@gimail.com\",\n    \"password\": \"1234\",\n    \"role_id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVER_ADDRESS}}/api/auth/register",
+							"host": [
+								"{{SERVER_ADDRESS}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Erkan\",\n    \"surname\": \"Yolaç\",\n    \"email\":    \"erkan@gimail.com\",\n    \"password\": \"1234\",\n    \"role_id\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{SERVER_ADDRESS}}/api/auth/register",
+									"host": [
+										"{{SERVER_ADDRESS}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "31"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1f-p7WAji2ngVOdj89Sn2hGPShONT8\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 11 May 2023 08:24:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Welcome Erkan!...\"\n}"
+						}
+					]
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const payload = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"token\", payload.token);",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Erkan\",\n    \"surname\": \"Yolaç\",\n    \"email\":    \"erkan@gimail.com\",\n    \"password\": \"1234\",\n    \"role_id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVER_ADDRESS}}/api/auth/login",
+							"host": [
+								"{{SERVER_ADDRESS}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get All Users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{SERVER_ADDRESS}}/api/users",
+							"host": [
+								"{{SERVER_ADDRESS}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{SERVER_ADDRESS}}/api/users",
+									"host": [
+										"{{SERVER_ADDRESS}}"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "447"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1bf-I20ugknVOGrYGv8N9uH5InMU7ZA\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 11 May 2023 08:26:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"email\": \"timur@pizza.com\",\n        \"name\": \"Timur\",\n        \"surname\": \"Egemen\",\n        \"role_name\": \"Admin\"\n    },\n    {\n        \"id\": 2,\n        \"email\": \"emre@pizza.com\",\n        \"name\": \"Emre\",\n        \"surname\": \"Şahiner\",\n        \"role_name\": \"User\"\n    },\n    {\n        \"id\": 3,\n        \"email\": \"erdem@pizza.com\",\n        \"name\": \"Erdem\",\n        \"surname\": \"Günay\",\n        \"role_name\": \"User\"\n    },\n    {\n        \"id\": 4,\n        \"email\": \"emre7@wit.com.tr\",\n        \"name\": \"Emre\",\n        \"surname\": \"Şahiner\",\n        \"role_name\": \"Admin\"\n    },\n    {\n        \"id\": 5,\n        \"email\": \"erkan@gimail.com\",\n        \"name\": \"Erkan\",\n        \"surname\": \"Yolaç\",\n        \"role_name\": \"Admin\"\n    }\n]"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Users Copy",
+			"item": [
+				{
+					"name": "register Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Ahmet\",\n    \"surname\": \"Yolaç\",\n    \"email\":    \"{{email}}\",\n    \"password\": \"1234\",\n    \"role_id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVER_ADDRESS}}/api/auth/register",
+							"host": [
+								"{{SERVER_ADDRESS}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Erkan\",\n    \"surname\": \"Yolaç\",\n    \"email\":    \"erkan@gimail.com\",\n    \"password\": \"1234\",\n    \"role_id\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{SERVER_ADDRESS}}/api/auth/register",
+									"host": [
+										"{{SERVER_ADDRESS}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "31"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1f-p7WAji2ngVOdj89Sn2hGPShONT8\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 11 May 2023 08:24:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Welcome Erkan!...\"\n}"
+						}
+					]
+				},
+				{
+					"name": "login Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const payload = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"token\", payload.token);",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Ahmet\",\n    \"surname\": \"Yolaç\",\n    \"email\":      \"{{email}}\",\n    \"password\": \"1234\",\n    \"role_id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVER_ADDRESS}}/api/auth/login",
+							"host": [
+								"{{SERVER_ADDRESS}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{SERVER_ADDRESS}}/api/users",
+							"host": [
+								"{{SERVER_ADDRESS}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{SERVER_ADDRESS}}/api/users",
+									"host": [
+										"{{SERVER_ADDRESS}}"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "447"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1bf-I20ugknVOGrYGv8N9uH5InMU7ZA\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 11 May 2023 08:26:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"email\": \"timur@pizza.com\",\n        \"name\": \"Timur\",\n        \"surname\": \"Egemen\",\n        \"role_name\": \"Admin\"\n    },\n    {\n        \"id\": 2,\n        \"email\": \"emre@pizza.com\",\n        \"name\": \"Emre\",\n        \"surname\": \"Şahiner\",\n        \"role_name\": \"User\"\n    },\n    {\n        \"id\": 3,\n        \"email\": \"erdem@pizza.com\",\n        \"name\": \"Erdem\",\n        \"surname\": \"Günay\",\n        \"role_name\": \"User\"\n    },\n    {\n        \"id\": 4,\n        \"email\": \"emre7@wit.com.tr\",\n        \"name\": \"Emre\",\n        \"surname\": \"Şahiner\",\n        \"role_name\": \"Admin\"\n    },\n    {\n        \"id\": 5,\n        \"email\": \"erkan@gimail.com\",\n        \"name\": \"Erkan\",\n        \"surname\": \"Yolaç\",\n        \"role_name\": \"Admin\"\n    }\n]"
+						}
+					]
+				}
+			]
+		}
+	]
+}

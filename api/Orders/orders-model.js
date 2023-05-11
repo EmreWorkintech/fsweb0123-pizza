@@ -1,31 +1,34 @@
 const db = require('../../data/db-config');
+const { formatResponse } = require('../../helpers/helpers');
 
-function getAll() {
-    return db('Orders as o')
-                .leftJoin('Order_Toppings as ot', 'o.id', 'ot.order_id')
-                .leftJoin('Toppings as t', 'ot.topping_id', 't.id')
-                .leftJoin('Pizzas as p', 'o.pizza_id', 'p.id')
-                .select('o.*',
-                        'p.name as pizza_name',
-                        'p.description',
-                        'p.price',
-                        't.id as topping_id',
-                        't.name as topping_name')
+async function getAll() {
+    const result = await db('Orders as o')
+                            .leftJoin('Order_Toppings as ot', 'o.id', 'ot.order_id')
+                            .leftJoin('Toppings as t', 'ot.topping_id', 't.id')
+                            .leftJoin('Pizzas as p', 'o.pizza_id', 'p.id')
+                            .select('o.*',
+                                    'p.name as pizza_name',
+                                    'p.description',
+                                    'p.price',
+                                    't.id as topping_id',
+                                    't.name as topping_name')
+    return formatResponse(result, 1);                      
 }
 
-function getById(id) {
-    return db('Orders as o')
-            .leftJoin('Order_Toppings as ot', 'o.id', 'ot.order_id')
-            .leftJoin('Toppings as t', 'ot.topping_id', 't.id')
-            .leftJoin('Pizzas as p', 'o.pizza_id', 'p.id')
-            .select('o.*',
-                    'p.name as pizza_name',
-                    'p.description',
-                    'p.price',
-                    't.id as topping_id',
-                    't.name as topping_name')
-            .where('o.id',id)
-            .first()
+async function getById(id) {
+    const result = await db('Orders as o')
+                            .leftJoin('Order_Toppings as ot', 'o.id', 'ot.order_id')
+                            .leftJoin('Toppings as t', 'ot.topping_id', 't.id')
+                            .leftJoin('Pizzas as p', 'o.pizza_id', 'p.id')
+                            .select('o.*',
+                                    'p.name as pizza_name',
+                                    'p.description',
+                                    'p.price',
+                                    't.id as topping_id',
+                                    't.name as topping_name')
+                            .where('o.id',id)
+
+    return formatResponse(result, 0);
 }
 
 function getByFilter(filter) {
@@ -35,7 +38,7 @@ function getByFilter(filter) {
 async function create(order) {
     let id;
     //toppingleri orderdan aldık
-    const newOrderToppings = order.toppings;
+    let newOrderToppings = order.toppings;
 
     //order'daki gereksiz bilgileri sildik
     delete order.toppings;
@@ -47,13 +50,14 @@ async function create(order) {
 
         //her bir topping'i tabloya tek tek ekliyorum.
         if(newOrderToppings.length>0){
-            newOrderToppings.forEach(async topping_id=>{
-                newOrderTopping = {
+            newOrderToppings = newOrderToppings.map(topping_id=>{   //[1,2,3,4,5]
+                return {
                     order_id: id,
                     topping_id: topping_id
                 }
-                await trx('Order_Toppings').insert(newOrderTopping);
-            })
+                
+            })  // [{order_id:1,topping_id:1 },{order_id:1,topping_id:1 },{order_id:1,topping_id:1 },{order_id:1,topping_id:1 }]
+            await trx('Order_Toppings').insert(newOrderToppings);
         }
     })
 

@@ -3,9 +3,11 @@ const jwt = require('jsonwebtoken');
 const { HASH_ROUND, JWT_SECRET } = require('../../config/config');
 const User = require('../Users/users-model');
 
-function protected(req,res,next) {
+function restricted(req,res,next) {
     try {
         const token = req.headers.authorization;
+
+        //cache'de o token var mı?
         jwt.verify(token, JWT_SECRET, (err,decodedJWT)=>{
             if(err) {
                 next(err)
@@ -57,7 +59,7 @@ function hashPassword(req,res,next) {
     try {
         const { password } = req.body;
         const hashedPassword = bcrypt.hashSync(password, HASH_ROUND);
-        console.log(hashedPassword);
+        //console.log(hashedPassword);
         req.body.password = hashedPassword;
         next()
     } catch(err) {
@@ -134,7 +136,7 @@ const validateEmail = (email) => {
   };
 
 module.exports = {
-    protected,
+    restricted,
     payloadCheck,
     hashPassword,
     checkRole,
